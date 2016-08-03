@@ -1,10 +1,12 @@
 var Google = require('./../js/google-maps.js').googleModule;
 var Weather = require('./../js/google-maps.js').weatherModule;
 
+var breweryKey = require('./../.env').breweryKey;
 var gmapsKey = require('./../.env').gmapsKey;
 var weatherKey = require('./../.env').weatherKey;
 var instagramIdKey = require('./../.env').instagramIdKey;
 var instagramSecretKey = require('./../.env').instagramSecretKey;
+
 
 $(document).ready(function() {
   var coord = [];
@@ -31,10 +33,16 @@ $(document).ready(function() {
         $('#temperature').html("The humidity in " + location + " is " + response.main.humidity + "%.");
         $('#fahrenheit').html("The temperature in " + location + " is " + temp.fahrenheit + "&#x2109.");
         $('#celsius').html("The temperature in " + location + " is " + temp.celsius + "&#x2103.");
+      }).then(function(response){
+        $.get("http://api.brewerydb.com/v2/?key=" + breweryKey).then(function(response) {
+          console.log(response);
+        });
       }).fail(function(error) {
         $('#temperature').text(error.responseJSON.message);
       });
     });
+
+
 
 
     $("#map").html('<iframe width="600" height="450" frameborder="0" src="https://www.google.com/maps/embed/v1/place?key='+ gmapsKey +

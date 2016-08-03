@@ -9,6 +9,7 @@ var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var googleTrends = require('google-trends-api');
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap" : {
