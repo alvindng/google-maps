@@ -1,5 +1,5 @@
 {
-  "name": "alarm-clock",
+  "name": "api-twoday",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "browser-sync": "^2.14.0",
     "browserify": "^13.1.0",
     "del": "^2.2.1",
+    "google-trends-api": "^1.2.5",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.1",
@@ -22,5 +23,13 @@
     "jshint": "^2.9.2",
     "vinyl-source-stream": "^1.1.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blogue/api-twoday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blogue/api-twoday/issues"
+  },
+  "homepage": "https://github.com/blogue/api-twoday#readme",
   "description": ""
 }
