@@ -1,5 +1,10 @@
 var gmapsKey = require('./../.env').gmapsKey;
 var weatherKey = require('./../.env').weatherKey;
+var twitterKey = require('./../.env').twitterKey;
+var oauthId = require('./../.env').oauthId;
+
+
+OAuth.initialize(oauthId);
 
 var coord = [];
 
@@ -10,6 +15,28 @@ function Weather(kelvin) {
   this.celsius = (kelvin - 273.15).toFixed(2);
   this.fahrenheit = ((kelvin * (9/5)) - 459.67).toFixed(2);
 }
+
+Google.prototype.getTweetsbyLocation = function(location, displayTweets) {
+  OAuth.popup('twitter', {cache: true}).done(function(oauthResult) {
+    oauthResult.get('https://api.twitter.com/1.1/search/tweets.json?q=%23' + location + '&result_type=popular').done(function(data) {
+      var tweetsByLocation = [];
+      var tweetsByStatusId = [];
+      var tweetName = [];
+      for(i = 0; i< data.statuses.length; i++) {
+        tweetsByLocation.push(data.statuses[i].text);
+        tweetsByStatusId.push(data.statuses[i].id_str);
+        tweetName.push(data.statuses[i].user.screen_name);
+      }
+      console.log(tweetName);
+      console.log(tweetsByStatusId);
+      // displayTweetsbyLocation(location, tweetsByLocation);
+      displayTweets(location, tweetsByStatusId, tweetName);
+      console.log(data);
+    }).fail(function(err) {
+      console.log("that didn't work");
+    });
+  });
+};
 
 Google.prototype.getDefault = function(displayDefault) {
     displayDefault(gmapsKey);
@@ -28,7 +55,6 @@ Google.prototype.getWeather = function(location, displayWeather) {
     coord[0] = lat;
     coord[1] = long;
     console.log(response);
-    console.log(coord);
   }).then(function(){
     $.get('http://api.openweathermap.org/data/2.5/weather?lat=' + coord[0] + '&lon=' + coord[1] + '&appid=' + weatherKey).then(function(response) {
       console.log(response);
@@ -43,7 +69,6 @@ Google.prototype.getWeather = function(location, displayWeather) {
     });
   });
 };
-
 
 exports.googleModule = Google;
 exports.weatherModule = Weather;

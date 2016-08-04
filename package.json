@@ -21,6 +21,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "jshint": "^2.9.2",
+    "oauthio-web": "^0.5.2",
     "vinyl-source-stream": "^1.1.0"
   },
   "repository": {
@@ -31,5 +32,8 @@
     "url": "https://github.com/blogue/api-twoday/issues"
   },
   "homepage": "https://github.com/blogue/api-twoday#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "google-trends-api": "^1.2.5"
+  }
 }
